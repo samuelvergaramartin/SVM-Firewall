@@ -1,0 +1,23 @@
+:root {
+    color-scheme: light dark;
+}
+
+#titulo {
+    text-align: center;
+    color: red;
+}
+
+#mainMenu {
+    text-align: center;
+}
+
+#mainMenu button {
+    background-color: cyan;
+    color: red;
+    font-size: 20px;
+}
+
+h3 {
+    text-align: center;
+    color: cyan
+}
