@@ -4,7 +4,7 @@
   "description": "Mi propio Firewall para mi ArchLinux con interfaz gráfica",
   "main": "index.js",
   "scripts": {
-    "start": "electron src/index 2> errors.log",
+    "start": "electron src/index 2> src/logs/errors.log",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
