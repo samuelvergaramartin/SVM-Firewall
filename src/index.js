@@ -13,21 +13,24 @@ app.on('ready', () => {
     });
 
     exec(__dirname + "/scripts/checkUser.so", (error, stdout, stderr) => {
-        outputCommand = stdout;
+        if(error) outputCommand = error;
+        if(stdout) outputCommand = stdout;
+        if(stderr) outputCommand = stderr;
     });
 
     setTimeout(() => {
         switch(outputCommand) {
             case "root": mainWindow.loadFile(__dirname + "/pages/index.html");
             break;
-            case user: mainWindow.loadFile(__dirname + "/pages/error/invalidUserError.html");
+            case `${user}`: mainWindow.loadFile(__dirname + "/pages/errors/invalidUserError.html");
             break
             default: {
                 
+                mainWindow.loadFile(__dirname + "/pages/errors/internalError.html");
             }
             break;
         }
         mainWindow.setMenu(null);
         
-    }, 1000);
+    }, 2000);
 })
