@@ -1,5 +1,7 @@
 const { app, BrowserWindow } = require('electron');
+const { exec } = require('child_process');
 let mainWindow;
+let outputCommand;
 app.on('ready', () => {
     mainWindow = new BrowserWindow({
         width: 800, 
@@ -8,6 +10,14 @@ app.on('ready', () => {
         minHeight: 400,
     });
 
-    mainWindow.loadFile(__dirname + "/pages/index.html");
-    mainWindow.setMenu(null);
+    exec(__dirname + "/scripts/checkUser.so", (error, stdout, stderr) => {
+        outputCommand = stdout;
+    });
+
+    setTimeout(() => {
+        if(outputCommand != "root") console.log("Error! Solo root puede ejecutar este programa!");
+
+        mainWindow.loadFile(__dirname + "/pages/index.html");
+        mainWindow.setMenu(null);
+    }, 1000);
 })
