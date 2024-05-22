@@ -1,5 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const { exec } = require('child_process');
+const os = require('os');
+const user = os.userInfo().username;
 let mainWindow;
 let outputCommand;
 app.on('ready', () => {
@@ -15,9 +17,17 @@ app.on('ready', () => {
     });
 
     setTimeout(() => {
-        if(outputCommand != "root") console.log("Error! Solo root puede ejecutar este programa!");
-
-        mainWindow.loadFile(__dirname + "/pages/index.html");
+        switch(outputCommand) {
+            case "root": mainWindow.loadFile(__dirname + "/pages/index.html");
+            break;
+            case user: mainWindow.loadFile(__dirname + "/pages/error/invalidUserError.html");
+            break
+            default: {
+                
+            }
+            break;
+        }
         mainWindow.setMenu(null);
+        
     }, 1000);
 })
