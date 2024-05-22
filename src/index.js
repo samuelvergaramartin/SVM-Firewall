@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron');
-const { exec } = require('child_process');
+const { exec, spawn } = require('child_process');
 const os = require('os');
 const user = os.userInfo().username;
 let mainWindow;
@@ -25,7 +25,7 @@ app.on('ready', () => {
             case `${user}`: mainWindow.loadFile(__dirname + "/pages/errors/invalidUserError.html");
             break
             default: {
-                
+                spawn("echo '" + outputCommand + "' > " + __dirname + "/logs/outputCommandErrors.log");
                 mainWindow.loadFile(__dirname + "/pages/errors/internalError.html");
             }
             break;
